@@ -25,7 +25,11 @@ func Listen() {
       case input=="scan":
         device.ScanForDevices()
       case strings.HasPrefix(input, "select"):
-        ValidateSelect(input) 
+        drive := SelectDevice(input)
+        
+        if drive != nil {
+          fmt.Println("\n",drive.Info(),"\n")
+        }
       default:
         fmt.Println("\nUnknown command:", input, "\n")
     }

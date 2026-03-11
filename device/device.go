@@ -44,12 +44,12 @@ func ScanForDevices() {
   }
 }
 
-func SelectDevice(index int) (*flashdrive.FlashDrive, error) {
-  if index < 1 || index > len(FoundDevicesPaths) {
-    return nil, fmt.Errorf("Invalid index")
+func SelectDevice(index int) (*flashdrive.FlashDrive, error) { 
+  if !IsDeviceIndexInRange(index) {
+    return nil, fmt.Errorf("Not a valid option in found devices") 
   }
-
-  path := FoundDevicesPaths[index-1]
+  
+  path := FoundDevicesPaths[index]
 
   return flashdrive.NewFlashDrive(path), nil
 }
@@ -59,7 +59,5 @@ func ContainsDevices() bool {
 }
 
 func IsDeviceIndexInRange(index int) bool {
-  index--
-
   return index >= 0 && index < len(FoundDevicesPaths) 
 } 
