@@ -10,9 +10,14 @@ import (
 
 func Listen() {
   reader := bufio.NewReader(os.Stdin)
+  session := NewSession()
 
   for {
-    fmt.Print("> ")
+    if session.SelectedDevice != nil {
+      fmt.Print(session.SelectedDevice.Name, " > ")
+    } else {
+      fmt.Print("> ")
+    }
     input, _ := reader.ReadString('\n')
     input = strings.TrimSpace(input)
 
@@ -25,10 +30,10 @@ func Listen() {
       case input=="scan":
         device.ScanForDevices()
       case strings.HasPrefix(input, "select"):
-        drive := SelectDevice(input)
+        session.SelectedDevice = SelectDevice(input)
         
-        if drive != nil {
-          fmt.Println("\n",drive.Info(),"\n")
+        if session.SelectedDevice != nil {
+          fmt.Println("\nSelected: ",session.SelectedDevice.Info(),"\n")
         }
       default:
         fmt.Println("\nUnknown command:", input, "\n")
