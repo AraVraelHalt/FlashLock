@@ -3,7 +3,6 @@
 A secure, fast, and memory-safe tool to encrypt your flash drives.
 
 [![Go](https://img.shields.io/badge/Go-1.21-blue?logo=go&logoColor=white)](https://golang.org/) 
-
 ![Build](https://github.com/AraVraelHalt/FlashLock/actions/workflows/go.yml/badge.svg)
 ---
 
