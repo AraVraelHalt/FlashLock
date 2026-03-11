@@ -22,6 +22,9 @@ func (f *FlashDrive) Info() string {
 }
 
 func (f *FlashDrive) Encrypt() error {
-  //TODO: implement encryption logic
-  return fmt.Errorf("Encryption not implemeneted yet.")
+  return f.EncryptContainer([]byte("Password123"))
+}
+
+func (f *FlashDrive) Decrypt() error {
+  return f.DecryptContainer([]byte("Password123"))
 }

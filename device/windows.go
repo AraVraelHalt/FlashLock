@@ -6,9 +6,9 @@ import (
   "strings"
 )
 
-type WindowsScanner struct{}
+type Windows struct{}
 
-func (w *WindowsScanner) Scan() []string {
+func (w *Windows) Scan() []string {
   out, err := exec.Command("wmic", "logicaldisk", "get", "name").Output()
 
   if err != nil {
@@ -28,4 +28,9 @@ func (w *WindowsScanner) Scan() []string {
   }
 
   return drives
+}
+
+func (w *Windows) Eject(driveLetter string) error {
+	cmd := exec.Command("powershell", "-Command", fmt.Sprintf("Remove-Item -Path %s -Recurse -Force", driveLetter))
+	return cmd.Run()
 }

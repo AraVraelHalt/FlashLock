@@ -2,12 +2,13 @@ package device
 
 import (
   "io/ioutil"
+  "os/exec"
   "log"
 )
 
-type MacScanner struct{}
+type Mac struct{}
 
-func (m *MacScanner) Scan() []string {
+func (m *Mac) Scan() []string {
   mountPath := "/Volumes/"
   entries, err := ioutil.ReadDir(mountPath)
 
@@ -25,4 +26,9 @@ func (m *MacScanner) Scan() []string {
   }
   
   return drives
+}
+
+func (m *Mac) Eject(mountPath string) error {
+	cmd := exec.Command("diskutil", "unmount", mountPath)
+	return cmd.Run()
 }

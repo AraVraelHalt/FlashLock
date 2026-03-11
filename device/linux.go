@@ -2,12 +2,13 @@ package device
 
 import (
   "io/ioutil"
+  "os/exec"
   "log"
 )
 
-type LinuxScanner struct{}
+type Linux struct{}
 
-func (l *LinuxScanner) Scan() []string {
+func (l *Linux) Scan() []string {
   mountPath := "/media/"
   entries, err := ioutil.ReadDir(mountPath)
 
@@ -25,4 +26,9 @@ func (l *LinuxScanner) Scan() []string {
   }
 
   return drives
+}
+
+func (l *Linux) Eject(mountPath string) error {
+	cmd := exec.Command("umount", mountPath)
+	return cmd.Run()
 }

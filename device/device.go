@@ -9,26 +9,27 @@ import (
 
 var FoundDevicesPaths []string
 
-type DeviceScanner interface {
+type Device interface {
   Scan() []string
+  Eject(path string) error
 }
 
-func NewScanner() DeviceScanner {
+func NewDevice() Device {
   switch runtime.GOOS {
     case "windows":
-      return &WindowsScanner{}
+      return &Windows{}
     case "darwin":
-      return &MacScanner{}
+      return &Mac{}
     case "linux":
-      return &LinuxScanner{}
+      return &Linux{}
     default:
       return nil
   }
 }
 
 func ScanForDevices() {
-  scanner := NewScanner()
-  FoundDevicesPaths = scanner.Scan()
+  drives := NewDevice()
+  FoundDevicesPaths = drives.Scan()
 
   if len(FoundDevicesPaths) == 0 {
     fmt.Println("\nNo drives detected.\n")
@@ -60,4 +61,10 @@ func ContainsDevices() bool {
 
 func IsDeviceIndexInRange(index int) bool {
   return index >= 0 && index < len(FoundDevicesPaths) 
-} 
+}
+
+func EjectDevice(path string) {
+  drives := NewDevice()
+
+  drives.Eject(path)
+}

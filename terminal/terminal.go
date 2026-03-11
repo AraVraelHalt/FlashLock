@@ -35,6 +35,29 @@ func Listen() {
         if session.SelectedDevice != nil {
           fmt.Println("\nSelected: ",session.SelectedDevice.Info(),"\n")
         }
+      case input=="encrypt":
+        if session.SelectedDevice != nil {
+          session.SelectedDevice.Encrypt()
+        } else {
+          fmt.Println("\nPlease select a device first\n")
+        }
+      case input=="decrypt":
+        if session.SelectedDevice != nil {
+          session.SelectedDevice.Decrypt()
+        } else {
+          fmt.Println("\nPlease select a device first\n")
+        }
+      case input=="eject":
+        if session.SelectedDevice != nil {
+          device.EjectDevice(session.SelectedDevice.Path)
+          session.SelectedDevice = nil
+
+          fmt.Println("\nDrive ejected...\n")
+        } else {
+          fmt.Println("\nPlease select a device first\n")
+        }
+      case input=="help":
+        PrintHelp()
       default:
         fmt.Println("\nUnknown command:", input, "\n")
     }
