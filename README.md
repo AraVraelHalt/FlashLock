@@ -4,6 +4,7 @@ A secure, fast, and memory-safe tool to encrypt your flash drives.
 
 [![Go](https://img.shields.io/badge/Go-1.21-blue?logo=go&logoColor=white)](https://golang.org/) 
 
+[![Build](https://github.com/AraVraelHalt/FlashLock/actions/workflows/build.yml/badge.svg)](https://github.com/AraVraelHalt/FlashLock/actions)
 ---
 
 ## 🚀 Features
@@ -43,7 +44,7 @@ A secure, fast, and memory-safe tool to encrypt your flash drives.
 - Git + GitHub 
 
 ## 📝 Usage
-As of now, run program using `go run main.go`, after the encryption flow is as follows:
+Parent folder should be at root of the flash drive and named `unlocked.container`, after the encryption flow is as follows:
 
 
 **Scan for devices:**
