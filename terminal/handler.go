@@ -55,3 +55,15 @@ func SelectDevice(input string) (*flashdrive.FlashDrive) {
 
   return drive
 }
+
+func PrintHelp() {
+	fmt.Println("\nAvailable commands:")
+	fmt.Println("  scan             - List all connected drives")
+  fmt.Println("  select <index>   - Selects a flashdrive from list") 
+	fmt.Println("  encrypt          - Encrypts selected flash drive")
+	fmt.Println("  decrypt          - Decrypts selected flash drive")
+	fmt.Println("  eject            - Safely ejects drive before removing")
+  fmt.Println("  clear            - Clean slate for terminal")
+	fmt.Println("  help             - Shows list of commands")
+  fmt.Println("  exit/quit        - Escape out of program\n")
+}
