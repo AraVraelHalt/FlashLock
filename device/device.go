@@ -32,9 +32,12 @@ func ScanForDevices() {
   FoundDevicesPaths = drives.Scan()
 
   if len(FoundDevicesPaths) == 0 {
-    fmt.Println("\nNo drives detected.\n")
+    fmt.Println()
+    fmt.Println("No drives detected.")
+    fmt.Println()
   } else {
-      fmt.Println("\nDetected drives:")
+      fmt.Println()
+      fmt.Println("Detected drives:")
 
       for i, d := range FoundDevicesPaths {
         name := filepath.Base(d)

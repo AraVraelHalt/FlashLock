@@ -14,24 +14,24 @@ func ValidateSelect(input string) (int, bool) {
   parts := strings.Split(input, " ")
 
   if len(parts) < 2 {
-    fmt.Println("\nUsage 'select <index>'\n")
+    FormatPrintln("Usage 'select <index>'")
     return invalid, status
   }
   
   if len(parts) > 2 {
-    fmt.Println("\nToo many arguments for 'select <index>'\n")
+    FormatPrintln("Too many arguments for 'select <index'")
     return invalid, status
   }
 
   index, err := strconv.Atoi(parts[1])
 
   if err != nil {
-    fmt.Println("\nIndex must be a number\n")
+    FormatPrintln("Index must be a number")
     return invalid, status
   }
  
   if !device.ContainsDevices() {
-    fmt.Println("\nRun 'scan' and see options first\n")
+    FormatPrintln("Run 'scan' and see options first")
     return invalid, status
   }
   
@@ -49,7 +49,7 @@ func SelectDevice(input string) (*flashdrive.FlashDrive) {
   drive, err := device.SelectDevice(index-1) 
 
   if err != nil {
-    fmt.Println("\n", err, "\n")
+    FormatPrintln(err.Error())
     return nil
   } 
 
@@ -61,12 +61,16 @@ func ValidateCryption(input string) (string, bool) {
   invalid := ""
 
   if len(parts) < 2 {
-    fmt.Println("\nUsage '",parts[0]," <psswd>'\n")
+    fmt.Println()
+    fmt.Println("Usage '",parts[0]," <psswd>'")
+    fmt.Println()
     return invalid, false 
   }
 
   if len(parts) > 2 {
-    fmt.Println("\nToo many arguments for '",parts[0]," <psswd>'\n")
+    fmt.Println()
+    fmt.Println("Too many arguments for '",parts[0]," <psswd>'")
+    fmt.Println()
     return invalid, false
   }
 
@@ -74,13 +78,15 @@ func ValidateCryption(input string) (string, bool) {
 }
 
 func PrintHelp() {
-	fmt.Println("\nAvailable commands:")
-	fmt.Println("  scan             - List all connected drives")
-  fmt.Println("  select <index>   - Selects a flashdrive from list") 
-	fmt.Println("  encrypt          - Encrypts selected flash drive")
-	fmt.Println("  decrypt          - Decrypts selected flash drive")
-	fmt.Println("  eject            - Safely ejects drive before removing")
-  fmt.Println("  clear            - Clean slate for terminal")
-	fmt.Println("  help             - Shows list of commands")
-  fmt.Println("  exit/quit        - Escape out of program\n")
+  fmt.Println(`
+Available commands:
+  scan             - List all connected drives
+  select <index>   - Selects a flashdrive from list 
+  encrypt          - Encrypts selected flash drive
+  decrypt          - Decrypts selected flash drive
+  eject            - Safely ejects drive before removing
+  clear            - Clean slate for terminal
+  help             - Shows list of commands
+  exit/quit        - Escape out of program
+  `)
 }

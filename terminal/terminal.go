@@ -23,7 +23,7 @@ func Listen() {
 
     switch {
       case input=="quit" || input=="exit":
-        fmt.Println("\nExiting...\n")
+        FormatPrintln("Exiting...")
         return
       case input=="clear":
         fmt.Print("\033[H\033[2J")
@@ -33,7 +33,9 @@ func Listen() {
         session.SelectedDevice = SelectDevice(input)
         
         if session.SelectedDevice != nil {
-          fmt.Println("\nSelected: ",session.SelectedDevice.Info(),"\n")
+          fmt.Println()
+          fmt.Println("Selected: ",session.SelectedDevice.Info())
+          fmt.Println()
         }
       case strings.HasPrefix(input, "encrypt "):
         if session.SelectedDevice != nil {
@@ -43,13 +45,13 @@ func Listen() {
             err := session.SelectedDevice.Encrypt(crypt)
 
             if err != nil {
-              fmt.Println("\n",err,"\n")
+              FormatPrintln(err.Error())
             } else {
-              fmt.Println("\nSuccessfully encrypted drive...\n")
+              FormatPrintln("Successfully encrypted drive...")
             }
           }
         } else {
-          fmt.Println("\nPlease select a device first\n")
+          FormatPrintln("Please select a device first")
         }
       case strings.HasPrefix(input, "decrypt "):
         if session.SelectedDevice != nil {
@@ -59,27 +61,35 @@ func Listen() {
             err := session.SelectedDevice.Decrypt(crypt)
   
             if err != nil {
-              fmt.Println("\n",err,"\n")
+              FormatPrintln(err.Error())
             } else {
-              fmt.Println("\nSuccessfully decrypted drive...\n")
+              FormatPrintln("Successfully decrypted drive...")
             }
           }
         } else {
-          fmt.Println("\nPlease select a device first\n")
+          FormatPrintln("Please select a device first")
         }
       case input=="eject":
         if session.SelectedDevice != nil {
           device.EjectDevice(session.SelectedDevice.Path)
           session.SelectedDevice = nil
 
-          fmt.Println("\nDrive ejected...\n")
+          FormatPrintln("Drive ejected...")
         } else {
-          fmt.Println("\nPlease select a device first\n")
+          FormatPrintln("Please select a device first")
         }
       case input=="help":
         PrintHelp()
       default:
-        fmt.Println("\nUnknown command:", input, "\n")
+        fmt.Println()
+        fmt.Println("Unknown command:", input)
+        fmt.Println()
     }
   }
+}
+
+func FormatPrintln (message string) {
+  fmt.Println()
+  fmt.Println(message)
+  fmt.Println()
 }
