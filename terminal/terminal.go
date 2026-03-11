@@ -16,29 +16,18 @@ func Listen() {
     input, _ := reader.ReadString('\n')
     input = strings.TrimSpace(input)
 
-    switch input {
-      case "quit", "exit":
+    switch {
+      case input=="quit" || input=="exit":
         fmt.Println("\nExiting...\n")
         return
-      case "clear":
+      case input=="clear":
         fmt.Print("\033[H\033[2J")
-      case "scan":
-        fmt.Println("\nScanning...\n")
-        scanner := device.NewScanner()
-        drives := scanner.Scan()
-
-        if len(drives) == 0 {
-          fmt.Println("No drives detected.\n")
-        } else {
-            fmt.Println("Detected drives:")
-          
-            for _, d := range drives {
-              fmt.Println(" -", d)
-            }
-            fmt.Println()
-        } 
+      case input=="scan":
+        device.ScanForDevices()
+      case strings.HasPrefix(input, "select"):
+        ValidateSelect(input) 
       default:
-        fmt.Println("Unknown command:", input, "\n")
+        fmt.Println("\nUnknown command:", input, "\n")
     }
   }
 }
