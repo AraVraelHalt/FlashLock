@@ -29,21 +29,41 @@ func Listen() {
         fmt.Print("\033[H\033[2J")
       case input=="scan":
         device.ScanForDevices()
-      case strings.HasPrefix(input, "select"):
+      case strings.HasPrefix(input, "select "):
         session.SelectedDevice = SelectDevice(input)
         
         if session.SelectedDevice != nil {
           fmt.Println("\nSelected: ",session.SelectedDevice.Info(),"\n")
         }
-      case input=="encrypt":
+      case strings.HasPrefix(input, "encrypt "):
         if session.SelectedDevice != nil {
-          session.SelectedDevice.Encrypt()
+          crypt, valid := ValidateCryption(input)
+
+          if valid {
+            err := session.SelectedDevice.Encrypt(crypt)
+
+            if err != nil {
+              fmt.Println("\n",err,"\n")
+            } else {
+              fmt.Println("\nSuccessfully encrypted drive...\n")
+            }
+          }
         } else {
           fmt.Println("\nPlease select a device first\n")
         }
-      case input=="decrypt":
+      case strings.HasPrefix(input, "decrypt "):
         if session.SelectedDevice != nil {
-          session.SelectedDevice.Decrypt()
+          crypt, valid := ValidateCryption(input)
+  
+          if valid {
+            err := session.SelectedDevice.Decrypt(crypt)
+  
+            if err != nil {
+              fmt.Println("\n",err,"\n")
+            } else {
+              fmt.Println("\nSuccessfully decrypted drive...\n")
+            }
+          }
         } else {
           fmt.Println("\nPlease select a device first\n")
         }

@@ -56,6 +56,23 @@ func SelectDevice(input string) (*flashdrive.FlashDrive) {
   return drive
 }
 
+func ValidateCryption(input string) (string, bool) {
+  parts := strings.Split(input, " ")
+  invalid := ""
+
+  if len(parts) < 2 {
+    fmt.Println("\nUsage '",parts[0]," <psswd>'\n")
+    return invalid, false 
+  }
+
+  if len(parts) > 2 {
+    fmt.Println("\nToo many arguments for '",parts[0]," <psswd>'\n")
+    return invalid, false
+  }
+
+  return parts[1], true
+}
+
 func PrintHelp() {
 	fmt.Println("\nAvailable commands:")
 	fmt.Println("  scan             - List all connected drives")

@@ -21,10 +21,10 @@ func (f *FlashDrive) Info() string {
   return fmt.Sprintf("Drive: %s at %s", f.Name, f.Path)
 }
 
-func (f *FlashDrive) Encrypt() error {
-  return f.EncryptContainer([]byte("Password123"))
+func (f *FlashDrive) Encrypt(crypt string) error {
+  return f.EncryptContainer([]byte(crypt))
 }
 
-func (f *FlashDrive) Decrypt() error {
-  return f.DecryptContainer([]byte("Password123"))
+func (f *FlashDrive) Decrypt(crypt string) error {
+  return f.DecryptContainer([]byte(crypt))
 }

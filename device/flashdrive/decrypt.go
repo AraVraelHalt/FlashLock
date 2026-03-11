@@ -47,7 +47,7 @@ func (f *FlashDrive) DecryptContainer(password []byte) error {
 	plaintext, err := gcm.Open(nil, nonce, ciphertext, nil)
 	
   if err != nil {
-		return err
+		return errors.New("Invalid Password")
 	}
 
 	tempDir := f.Path + "/.temp_decrypt"
