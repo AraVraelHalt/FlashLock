@@ -39,7 +39,7 @@ A secure, fast, and memory-safe tool to encrypt your flash drives.
 - Tamper detection (Coming soon)
 
 **Build & Packaging:**  
-- Go compiler → single binary (coming soon)
+- Go compiler → single binary 
 - Git + GitHub
 
 ---
