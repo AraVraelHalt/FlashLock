@@ -40,7 +40,9 @@ A secure, fast, and memory-safe tool to encrypt your flash drives.
 
 **Build & Packaging:**  
 - Go compiler → single binary (coming soon)
-- Git + GitHub 
+- Git + GitHub
+
+---
 
 ## 📝 Usage
 Parent folder should be at root of the flash drive and named `unlocked.container`, after the encryption flow is as follows:
@@ -70,6 +72,8 @@ decrypt <psswd>
 ```bash
 eject
 ```
+
+---
 
 ## 🐛 Bugs
 
