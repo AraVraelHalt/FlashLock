@@ -71,4 +71,16 @@ decrypt <psswd>
 eject
 ```
 
+## 🐛 Bugs
 
+If you encounter any bugs or unexpected behavior while using this project, please follow these steps:
+
+1. **Check existing issues** – Before reporting, see if the issue has already been reported in the [Issues](https://github.com/AraVraelHalt/FlashLock/issues) section.
+2. **Provide detailed information** – Include:
+   - Steps to reproduce the bug
+   - Expected behavior vs actual behavior
+   - Screenshots or logs, if applicable
+   - Your environment (OS, version, dependencies)
+3. **Report a new issue** – If it hasn’t been reported, create a new issue in the repository with all relevant information.
+
+We appreciate your help in improving this project! 🚀
